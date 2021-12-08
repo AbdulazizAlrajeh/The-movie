@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".views.DetailsWatchedFragment" >
+
+    <ImageView
+        android:id="@+id/details_watched_imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:scaleType="fitCenter"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/details_watched_name_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="TextView"
+        android:textSize="34sp" />
+
+    <TextView
+        android:id="@+id/destails_watched_description_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:inputType="textMultiLine"
+        android:text="TextView"
+        android:textSize="24sp"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:id="@+id/details_watched_eyes_imageView"
+        android:layout_width="44dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/button_color"
+        android:backgroundTint="@color/button_color"
+        android:src="@drawable/ic_open_eyes_removebg_preview" />
+
+</LinearLayout>

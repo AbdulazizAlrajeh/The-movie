@@ -22,6 +22,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+        window.navigationBarColor = this.resources.getColor(R.color.background)
         mDelayHandler = Handler()
 
         mDelayHandler!!.postDelayed(mRunnable, splashLong)
