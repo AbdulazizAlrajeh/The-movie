@@ -5,4 +5,10 @@
     <string name="watched_later">Watched later</string>
     <string name="watched">Watched</string>
     <string name="home">Home</string>
+    <string name="registerInLogin">When don\'t have account?</string>
+    <string name="login">Log In</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="register">Register</string>
+    <string name="loginInRegister">Already have the account?</string>
 </resources>

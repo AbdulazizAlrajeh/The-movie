@@ -13,7 +13,7 @@ class SplashActivity : AppCompatActivity() {
         // for count the time
         if (!isFinishing) {
 
-            val intent = Intent(applicationContext, MainActivity::class.java)
+            val intent = Intent(applicationContext, LogInActivity::class.java)
             startActivity(intent)
             finish()
         }

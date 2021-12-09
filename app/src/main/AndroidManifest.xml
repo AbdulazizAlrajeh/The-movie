@@ -10,20 +10,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".views.RegisterActivity"
+            android:exported="true" />
+        <activity
+            android:name=".views.LogInActivity"
+            android:exported="true" />
+        <activity
             android:name=".views.SplashActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
-            android:theme="@style/Splash"
-            android:configChanges="orientation|keyboardHidden|screenSize">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:theme="@style/Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".views.MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>
