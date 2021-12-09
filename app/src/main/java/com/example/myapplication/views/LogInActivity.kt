@@ -56,10 +56,16 @@ class LogInActivity : AppCompatActivity() {
                             }
                         }
                 } else {
-                    Toast.makeText(this, "Password should be not empty", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this, "Password should be not empty",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             } else {
-                Toast.makeText(this, "Email should be not empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this, "Email should be not empty",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
