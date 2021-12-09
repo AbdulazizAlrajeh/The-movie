@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.example.myapplication.R
+import com.example.myapplication.repository.ApiServiceRepository
 
 class SplashActivity : AppCompatActivity() {
     private var mDelayHandler: Handler? = null
@@ -22,6 +23,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+        ApiServiceRepository.init(this)
 
         window.navigationBarColor = this.resources.getColor(R.color.background)
         mDelayHandler = Handler()

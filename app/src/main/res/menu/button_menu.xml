@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/home_menu"
+        android:id="@+id/mainFragment"
         android:icon="@drawable/ic_vector_home"
         android:title="@string/home" />
     <item
-        android:id="@+id/watched_later_menu"
+        android:id="@+id/watchLaterFragment"
         android:icon="@drawable/wall_clock"
         android:title="@string/watched_later" />
     <item
-        android:id="@+id/watched_menu"
+        android:id="@+id/watchedFragment"
         android:icon="@drawable/watched"
         android:title="@string/watched" />
 </menu>
