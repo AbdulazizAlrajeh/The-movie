@@ -12,7 +12,7 @@
     <ImageView
         android:id="@+id/details_item_imageView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_marginBottom="30dp"
         android:scaleType="fitCenter"
         tools:src="@tools:sample/avatars" />
@@ -23,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:paddingBottom="30dp"
-        android:text="TextView"
         android:textSize="24sp" />
 
     <TextView
@@ -32,7 +31,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:paddingBottom="30dp"
-        android:text="TextView"
         android:textSize="24sp" />
 
     <Button

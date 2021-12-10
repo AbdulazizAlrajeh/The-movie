@@ -16,6 +16,8 @@ class MainViewModel : ViewModel() {
     // Getting instance from Api Service Repository with companion object function
     private val repositoryAPI = ApiServiceRepository.get()
 
+    var selectedItemMutableLiveData = MutableLiveData<Result>()
+
     var page = 1
 
     val moviesLiveDate = MutableLiveData<List<Result>>()

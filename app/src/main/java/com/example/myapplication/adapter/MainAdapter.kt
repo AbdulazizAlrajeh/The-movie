@@ -9,13 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.example.myapplication.models.Result
+import com.example.myapplication.views.viewmodels.MainViewModel
 
-class MainAdapter( val viewmodel : ViewModel,val context: Context) :
+class MainAdapter( val viewmodel : MainViewModel,val context: Context) :
     RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Result>() {
@@ -47,6 +48,11 @@ class MainAdapter( val viewmodel : ViewModel,val context: Context) :
         Glide.with(context)
             .load("https://image.tmdb.org/t/p/w500/${item.posterPath}")
             .into(holder.moviePicture)
+
+        holder.itemView.setOnClickListener {
+            viewmodel.selectedItemMutableLiveData.postValue(item)
+            it.findNavController().navigate(R.id.action_mainFragment_to_detailsItemFragment)
+        }
 
     }
 
