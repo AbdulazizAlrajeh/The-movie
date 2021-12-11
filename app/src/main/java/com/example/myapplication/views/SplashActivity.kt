@@ -1,22 +1,36 @@
 package com.example.myapplication.views
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import com.example.myapplication.R
 import com.example.myapplication.repository.ApiServiceRepository
 
+private lateinit var sharedPref: SharedPreferences
+
+private const val TAG = "SplashActivity"
 class SplashActivity : AppCompatActivity() {
     private var mDelayHandler: Handler? = null
     private val splashLong: Long = 5000 // five seconds
     internal val mRunnable: Runnable = Runnable {
         // for count the time
         if (!isFinishing) {
+            sharedPref = this.getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
+            if (sharedPref.getBoolean("state", false)){
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+                Log.d(TAG,sharedPref.getBoolean("state", true).toString())
+            }else{
+                val intent = Intent(applicationContext, LogInActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
 
-            val intent = Intent(applicationContext, LogInActivity::class.java)
-            startActivity(intent)
-            finish()
         }
     }
 
