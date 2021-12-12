@@ -1,6 +1,7 @@
 package com.example.myapplication.views
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,11 +17,15 @@ import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.views.viewmodels.MainViewModel
 import com.example.myapplication.models.Result
+import com.example.myapplication.views.viewmodels.SaveToFirebaseViewModel
 
+private const val TAG = "DetailsItemFragment"
 
 class DetailsItemFragment : Fragment() {
 
     private val moviesViewModel: MainViewModel by activityViewModels()
+    private val WatchLaterViewModel: SaveToFirebaseViewModel by activityViewModels()
+
     private lateinit var selectItemModel: Result
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,31 +43,63 @@ class DetailsItemFragment : Fragment() {
         val descriptionOfMovie: TextView = view.findViewById(R.id.details_description_textView)
         val wathcedLater: Button = view.findViewById(R.id.details_watch_later_button)
         val watched: Button = view.findViewById(R.id.details_watched_button)
-
+        observers()
         moviesViewModel.selectedItemMutableLiveData.observe(viewLifecycleOwner, Observer {
             Glide.with(requireContext())
                 .load("https://image.tmdb.org/t/p/w500/${it.posterPath}")
                 .into(imageMovie)
-            nameOfMovie.text = it.originalTitle
-            descriptionOfMovie.text = it.overview
+            nameOfMovie.text = "Name The Movie: ${it.originalTitle}"
+            descriptionOfMovie.text = "Description:\n\t${it.overview}"
             selectItemModel = it
         })
 
-        /* wathcedLater.setOnClickListener {
-             moviesViewModel.selectedItemMutableLiveData.observe(viewLifecycleOwner, Observer {
-                 it.iswatchedLater = true
-                 Toast.makeText(requireActivity(), "Add to watch later",
-                     Toast.LENGTH_SHORT).show()
-             })
+        wathcedLater.setOnClickListener {
+            moviesViewModel.selectedItemMutableLiveData.observe(viewLifecycleOwner, Observer {
+                it.iswatchedLater = true
+                WatchLaterViewModel.callSaveMovieToFirebase(it)
+                /*Toast.makeText(
+                    requireActivity(), "Add to watch later",
+                    Toast.LENGTH_SHORT
+                ).show()*/
+//                moviesViewModel.selectedItemMutableLiveData.postValue(null)
+                findNavController().navigate(R.id.action_detailsItemFragment_to_mainFragment)
+            })
 
 
-         }
-         watched.setOnClickListener {
-             moviesViewModel.selectedItemMutableLiveData.observe(viewLifecycleOwner, Observer {
-                 it.isWatched = true
-                 Toast.makeText(requireActivity(), "Add to watched",
-                     Toast.LENGTH_SHORT).show()
-             })
-         }*/
+        }
+        watched.setOnClickListener {
+            moviesViewModel.selectedItemMutableLiveData.observe(viewLifecycleOwner, Observer {
+                it.isWatched = true
+               // observers()
+                WatchLaterViewModel.callSaveMovieToFirebase(it)
+                /*Toast.makeText(
+                    requireActivity(), "Add to watched",
+                    Toast.LENGTH_SHORT
+                ).show()*/
+//                moviesViewModel.selectedItemMutableLiveData.postValue(null)
+
+                findNavController().navigate(R.id.action_detailsItemFragment_to_mainFragment)
+            })
+        }
     }
+
+    fun observers() {
+        WatchLaterViewModel.watchLaterMoviesLiveDate.observe(viewLifecycleOwner, {
+            it?.let{
+                Log.d(TAG, it.toString())
+                WatchLaterViewModel.watchLaterMoviesLiveDate.postValue(null)
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        WatchLaterViewModel.watchLaterMoviesErrorLiveData.observe(viewLifecycleOwner, {
+            Log.d(TAG, it.toString())
+            WatchLaterViewModel.watchLaterMoviesErrorLiveData.postValue(null)
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+
+        })
+
+    }
+
+
 }

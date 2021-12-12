@@ -56,7 +56,7 @@ class LogInActivity : AppCompatActivity() {
                                 sharedPref = this.getSharedPreferences(SHARED_PREF_FILE,
                                     Context.MODE_PRIVATE)
                                 sharedPrefEditor = sharedPref.edit()
-                                sharedPrefEditor.putBoolean("state", true)
+                                sharedPrefEditor.putBoolean("state login", true)
                                 sharedPrefEditor.commit()
 
                                 startActivity(intent)

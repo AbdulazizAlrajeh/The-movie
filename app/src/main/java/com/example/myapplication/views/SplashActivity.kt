@@ -9,6 +9,7 @@ import android.os.Handler
 import android.util.Log
 import com.example.myapplication.R
 import com.example.myapplication.repository.ApiServiceRepository
+import com.example.myapplication.repository.FirebaseServiceRepository
 
 private lateinit var sharedPref: SharedPreferences
 
@@ -20,11 +21,11 @@ class SplashActivity : AppCompatActivity() {
         // for count the time
         if (!isFinishing) {
             sharedPref = this.getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
-            if (sharedPref.getBoolean("state", false)){
+            if (sharedPref.getBoolean("state login", false)){
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
-                Log.d(TAG,sharedPref.getBoolean("state", true).toString())
+                Log.d(TAG,sharedPref.getBoolean("state login", true).toString())
             }else{
                 val intent = Intent(applicationContext, LogInActivity::class.java)
                 startActivity(intent)
@@ -38,6 +39,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         ApiServiceRepository.init(this)
+        FirebaseServiceRepository.init(this)
 
         window.navigationBarColor = this.resources.getColor(R.color.background)
         mDelayHandler = Handler()

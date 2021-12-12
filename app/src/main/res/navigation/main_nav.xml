@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_detailsItemFragment_to_watchedFragment"
             app:destination="@id/watchedFragment" />
+        <action
+            android:id="@+id/action_detailsItemFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/watchLaterFragment"
