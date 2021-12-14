@@ -19,8 +19,8 @@ class SaveToFirebaseViewModel:ViewModel() {
 
     private val firebaseRepository = FirebaseServiceRepository.get()
 
-    val watchLaterMoviesLiveDate = MutableLiveData<String>()
-    val watchLaterMoviesErrorLiveData = MutableLiveData<String>()
+    val saveToFirebaseLiveDataCorrect = MutableLiveData<String>()
+    val saveToFirebaseLiveDataException = MutableLiveData<String>()
 
 
     fun callSaveMovieToFirebase(result:Result) {
@@ -31,17 +31,17 @@ class SaveToFirebaseViewModel:ViewModel() {
                     response.addOnCompleteListener {
                         if (response.isSuccessful) {
                                 Log.d(TAG, it.toString())
-//                                watchLaterMoviesLiveDate.postValue("Successfully")
+                            saveToFirebaseLiveDataCorrect.postValue("Successfully")
 
                         } else {
                             // Log.d(TAG, response.message().toString())
                             Log.d(TAG, response.exception.toString())
-                            watchLaterMoviesErrorLiveData.postValue(response.exception.toString())
+                            saveToFirebaseLiveDataException.postValue(response.exception.toString())
                         }
                     }
             } catch (e: Exception) {
                 // Send Error Response to view
-                watchLaterMoviesErrorLiveData.postValue(e.message.toString())
+                saveToFirebaseLiveDataException.postValue(e.message.toString())
             }
         }
     }

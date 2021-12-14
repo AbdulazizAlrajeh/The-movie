@@ -18,11 +18,14 @@ import com.example.myapplication.R
 import com.example.myapplication.views.viewmodels.MainViewModel
 import com.example.myapplication.models.Result
 import com.example.myapplication.views.viewmodels.SaveToFirebaseViewModel
+import com.example.myapplication.views.viewmodels.WatchLaterViewModel
+import com.example.myapplication.views.viewmodels.WatchedViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 private const val TAG = "DetailsItemFragment"
 
 class DetailsItemFragment : Fragment() {
-
+    val userId = FirebaseAuth.getInstance().currentUser?.uid.toString()
     private val moviesViewModel: MainViewModel by activityViewModels()
     private val WatchLaterViewModel: SaveToFirebaseViewModel by activityViewModels()
 
@@ -48,54 +51,48 @@ class DetailsItemFragment : Fragment() {
             Glide.with(requireContext())
                 .load("https://image.tmdb.org/t/p/w500/${it.posterPath}")
                 .into(imageMovie)
-            nameOfMovie.text = "Name The Movie: ${it.originalTitle}"
+            nameOfMovie.text = "Name The Movie: ${it.title}"
             descriptionOfMovie.text = "Description:\n\t${it.overview}"
             selectItemModel = it
         })
 
         wathcedLater.setOnClickListener {
-            moviesViewModel.selectedItemMutableLiveData.observe(viewLifecycleOwner, Observer {
-                it.iswatchedLater = true
-                WatchLaterViewModel.callSaveMovieToFirebase(it)
-                /*Toast.makeText(
-                    requireActivity(), "Add to watch later",
-                    Toast.LENGTH_SHORT
-                ).show()*/
-//                moviesViewModel.selectedItemMutableLiveData.postValue(null)
-                findNavController().navigate(R.id.action_detailsItemFragment_to_mainFragment)
-            })
+            selectItemModel.iswatchedLater = true
+            selectItemModel.userId = userId
+                WatchLaterViewModel.callSaveMovieToFirebase(selectItemModel)
+
 
 
         }
         watched.setOnClickListener {
-            moviesViewModel.selectedItemMutableLiveData.observe(viewLifecycleOwner, Observer {
-                it.isWatched = true
-               // observers()
-                WatchLaterViewModel.callSaveMovieToFirebase(it)
-                /*Toast.makeText(
-                    requireActivity(), "Add to watched",
-                    Toast.LENGTH_SHORT
-                ).show()*/
-//                moviesViewModel.selectedItemMutableLiveData.postValue(null)
+            selectItemModel.isWatched = true
+            Log.d(TAG,"${selectItemModel.isWatched}")
+            selectItemModel.userId = userId
+            WatchLaterViewModel.callSaveMovieToFirebase(selectItemModel)
 
-                findNavController().navigate(R.id.action_detailsItemFragment_to_mainFragment)
-            })
         }
     }
 
     fun observers() {
-        WatchLaterViewModel.watchLaterMoviesLiveDate.observe(viewLifecycleOwner, {
+        WatchLaterViewModel.saveToFirebaseLiveDataCorrect.observe(viewLifecycleOwner, {
             it?.let{
                 Log.d(TAG, it.toString())
-                WatchLaterViewModel.watchLaterMoviesLiveDate.postValue(null)
-                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
+                WatchLaterViewModel.saveToFirebaseLiveDataCorrect.postValue(null)
+                findNavController().navigate(R.id.action_detailsItemFragment_to_mainFragment)
+
+
             }
         })
 
-        WatchLaterViewModel.watchLaterMoviesErrorLiveData.observe(viewLifecycleOwner, {
-            Log.d(TAG, it.toString())
-            WatchLaterViewModel.watchLaterMoviesErrorLiveData.postValue(null)
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        WatchLaterViewModel.saveToFirebaseLiveDataException.observe(viewLifecycleOwner, {
+           it?.let {
+               Log.d(TAG, it.toString())
+               Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
+               WatchLaterViewModel.saveToFirebaseLiveDataException.postValue(null)
+               findNavController().navigate(R.id.action_detailsItemFragment_to_mainFragment)
+
+           }
 
         })
 

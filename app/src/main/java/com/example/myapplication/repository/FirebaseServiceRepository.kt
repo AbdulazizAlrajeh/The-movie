@@ -1,23 +1,42 @@
 package com.example.myapplication.repository
 
 import android.content.Context
-import android.widget.Toast
 import com.example.myapplication.models.Result
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.lang.Exception
 
-class FirebaseServiceRepository (context: Context){
-    private val personalCollection = Firebase.firestore
+class FirebaseServiceRepository(context: Context) {
+     val personalCollection = Firebase.firestore.collection("watch")
+    suspend fun saveMovie(result: Result) =
+        personalCollection.add(result)
 
-    suspend fun saveMovie(result: Result) = personalCollection
-        .collection("${ FirebaseAuth.getInstance().uid }").add(result)
+    suspend fun getMovies(result: Result) =
+        personalCollection
+            .whereEqualTo("id",result.id)
+            .whereEqualTo("watched",result.isWatched)
 
+    suspend fun getMoviesWatchLater(watchLater: Boolean, userId: String) =
+        personalCollection
+
+            .whereEqualTo("iswatchedLater", watchLater)
+            .whereEqualTo("userId", userId)
+
+    suspend fun getMoviesWatched(watched: Boolean, userId: String) =
+        personalCollection
+
+            .whereEqualTo("watched", watched)
+            .whereEqualTo("userId", userId)
+
+    suspend fun updateWatcherLater(result: Result, newResult: Map<String, Any>) =
+        personalCollection
+            .whereEqualTo("id", result.id)
+
+
+    suspend fun deleteWatchLater(result: Result) =
+        personalCollection
+            .whereEqualTo("id", result.id)
 
 
 
@@ -29,7 +48,7 @@ class FirebaseServiceRepository (context: Context){
                 instance = FirebaseServiceRepository(context)
         }
 
-        fun get() : FirebaseServiceRepository {
+        fun get(): FirebaseServiceRepository {
             return instance ?: throw Exception("ApiServiceRepository must be initialized ")
         }
     }
