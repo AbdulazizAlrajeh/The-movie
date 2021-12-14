@@ -34,8 +34,7 @@ class MainViewModel : ViewModel() {
 
                         // Send Response to view
                         moviesLiveDate.postValue(results)
-
-
+                        page++
                     }
 
                     Log.d(TAG, response.message())
