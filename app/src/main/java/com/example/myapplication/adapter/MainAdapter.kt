@@ -51,7 +51,7 @@ class MainAdapter( val viewmodel : MainViewModel,val context: Context) :
 
         holder.itemView.setOnClickListener {
             viewmodel.selectedItemMutableLiveData.postValue(item)
-            it.findNavController().navigate(R.id.action_mainFragment_to_detailsItemFragment)
+            it.findNavController().navigate(R.id.action_mainFragment2_to_detailsItemFragment)
         }
 
     }

@@ -79,7 +79,7 @@ class DetailsItemFragment : Fragment() {
                 Log.d(TAG, it.toString())
                 Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
                 WatchLaterViewModel.saveToFirebaseLiveDataCorrect.postValue(null)
-                findNavController().navigate(R.id.action_detailsItemFragment_to_mainFragment)
+                findNavController().navigate(R.id.action_detailsItemFragment_to_mainFragment2)
 
 
             }
@@ -90,7 +90,7 @@ class DetailsItemFragment : Fragment() {
                Log.d(TAG, it.toString())
                Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
                WatchLaterViewModel.saveToFirebaseLiveDataException.postValue(null)
-               findNavController().navigate(R.id.action_detailsItemFragment_to_mainFragment)
+               findNavController().navigate(R.id.action_detailsItemFragment_to_mainFragment2)
 
            }
 
