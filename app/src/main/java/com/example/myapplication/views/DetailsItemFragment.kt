@@ -59,14 +59,13 @@ class DetailsItemFragment : Fragment() {
         wathcedLater.setOnClickListener {
             selectItemModel.iswatchedLater = true
             selectItemModel.userId = userId
-                WatchLaterViewModel.callSaveMovieToFirebase(selectItemModel)
-
+            WatchLaterViewModel.callSaveMovieToFirebase(selectItemModel)
 
 
         }
         watched.setOnClickListener {
             selectItemModel.isWatched = true
-            Log.d(TAG,"${selectItemModel.isWatched}")
+            Log.d(TAG, "${selectItemModel.isWatched}")
             selectItemModel.userId = userId
             WatchLaterViewModel.callSaveMovieToFirebase(selectItemModel)
 
@@ -75,7 +74,7 @@ class DetailsItemFragment : Fragment() {
 
     fun observers() {
         WatchLaterViewModel.saveToFirebaseLiveDataCorrect.observe(viewLifecycleOwner, {
-            it?.let{
+            it?.let {
                 Log.d(TAG, it.toString())
                 Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
                 WatchLaterViewModel.saveToFirebaseLiveDataCorrect.postValue(null)
@@ -86,13 +85,13 @@ class DetailsItemFragment : Fragment() {
         })
 
         WatchLaterViewModel.saveToFirebaseLiveDataException.observe(viewLifecycleOwner, {
-           it?.let {
-               Log.d(TAG, it.toString())
-               Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
-               WatchLaterViewModel.saveToFirebaseLiveDataException.postValue(null)
-               findNavController().navigate(R.id.action_detailsItemFragment_to_mainFragment2)
+            it?.let {
+                Log.d(TAG, it.toString())
+                Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
+                WatchLaterViewModel.saveToFirebaseLiveDataException.postValue(null)
+                findNavController().navigate(R.id.action_detailsItemFragment_to_mainFragment2)
 
-           }
+            }
 
         })
 

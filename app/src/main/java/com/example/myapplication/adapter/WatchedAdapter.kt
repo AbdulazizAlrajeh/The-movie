@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide
 import com.example.myapplication.models.Result
 import com.example.myapplication.views.viewmodels.WatchedViewModel
 
-class WatchedAdapter(val viewmodel : WatchedViewModel, val context: Context) :
+class WatchedAdapter(val viewmodel: WatchedViewModel, val context: Context) :
     RecyclerView.Adapter<WatchedAdapter.ViewModel>() {
 
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Result>() {
@@ -24,11 +24,11 @@ class WatchedAdapter(val viewmodel : WatchedViewModel, val context: Context) :
         }
 
         override fun areContentsTheSame(oldItem: Result, newItem: Result): Boolean {
-            return  oldItem == newItem
+            return oldItem == newItem
         }
     }
 
-    private val differ = AsyncListDiffer(this,DIFF_CALLBACK)
+    private val differ = AsyncListDiffer(this, DIFF_CALLBACK)
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchedAdapter.ViewModel {
@@ -58,11 +58,13 @@ class WatchedAdapter(val viewmodel : WatchedViewModel, val context: Context) :
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
+
     fun submitList(list: List<Result>) {
         differ.submitList(list)
     }
+
     class ViewModel(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val moviePicture : ImageView = itemView.findViewById(R.id.main_item_imageview)
-        val nameOfMovie : TextView = itemView.findViewById(R.id.main_item_textview)
+        val moviePicture: ImageView = itemView.findViewById(R.id.main_item_imageview)
+        val nameOfMovie: TextView = itemView.findViewById(R.id.main_item_textview)
     }
 }

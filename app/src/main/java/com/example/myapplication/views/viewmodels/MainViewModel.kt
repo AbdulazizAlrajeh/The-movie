@@ -24,7 +24,7 @@ class MainViewModel : ViewModel() {
     val moviesErrorLiveData = MutableLiveData<String>()
 
     fun callGetMovies() {
-        Log.d(TAG,"$page")
+        Log.d(TAG, "$page")
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = repositoryAPI.getMovies(page)
@@ -35,7 +35,7 @@ class MainViewModel : ViewModel() {
                         // Send Response to view
                         moviesLiveDate.postValue(results)
                     }
-                    page+=1
+                    page += 1
 
                 } else {
                     Log.d(TAG, response.message().toString())

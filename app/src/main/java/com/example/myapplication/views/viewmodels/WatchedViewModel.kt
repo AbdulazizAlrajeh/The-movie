@@ -10,32 +10,33 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 private const val TAG = "WatchedViewModel"
-class WatchedViewModel:ViewModel() {
+
+class WatchedViewModel : ViewModel() {
 
     private val firebaseRepository = FirebaseServiceRepository.get()
     val watchedLiveData = MutableLiveData<List<Result>>()
     val watchedMoviesLiveDataException = MutableLiveData<String>()
     var selectedItemMutableLiveData = MutableLiveData<Result>()
 
-    fun callWatchedMovies(userId:String){
-        viewModelScope.launch(Dispatchers.IO){
+    fun callWatchedMovies(userId: String) {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = firebaseRepository.getMoviesWatched(true,userId).get()
+                val response = firebaseRepository.getMoviesWatched(true, userId).get()
                 response.addOnSuccessListener {
-                    if (response.isSuccessful){
+                    if (response.isSuccessful) {
                         val list = mutableListOf<Result>()
-                        for (document in it.documents){
+                        for (document in it.documents) {
                             val movie = document.toObject<Result>()
                             list.add(movie!!)
                         }
                         watchedLiveData.postValue(list)
-                    }else{
+                    } else {
 
                         watchedMoviesLiveDataException.postValue(response.exception.toString())
 
                     }
                 }
-            }catch (e:Exception){
+            } catch (e: Exception) {
                 watchedMoviesLiveDataException.postValue(e.message)
             }
         }

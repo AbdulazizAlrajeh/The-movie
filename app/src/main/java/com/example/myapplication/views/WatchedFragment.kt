@@ -19,6 +19,7 @@ import com.example.myapplication.views.viewmodels.WatchedViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 private const val TAG = "WatchedFragment"
+
 class WatchedFragment : Fragment() {
 
     val userId = FirebaseAuth.getInstance().currentUser?.uid.toString()

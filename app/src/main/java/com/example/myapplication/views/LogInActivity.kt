@@ -53,8 +53,10 @@ class LogInActivity : AppCompatActivity() {
                                     FirebaseAuth.getInstance().currentUser!!.email
                                 )
 
-                                sharedPref = this.getSharedPreferences(SHARED_PREF_FILE,
-                                    Context.MODE_PRIVATE)
+                                sharedPref = this.getSharedPreferences(
+                                    SHARED_PREF_FILE,
+                                    Context.MODE_PRIVATE
+                                )
                                 sharedPrefEditor = sharedPref.edit()
                                 sharedPrefEditor.putBoolean("state login", true)
                                 sharedPrefEditor.commit()

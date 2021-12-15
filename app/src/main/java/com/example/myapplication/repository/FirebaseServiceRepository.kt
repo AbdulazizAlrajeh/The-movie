@@ -8,14 +8,14 @@ import com.google.firebase.ktx.Firebase
 import java.lang.Exception
 
 class FirebaseServiceRepository(context: Context) {
-     val personalCollection = Firebase.firestore.collection("watch")
+    val personalCollection = Firebase.firestore.collection("watch")
     suspend fun saveMovie(result: Result) =
         personalCollection.add(result)
 
     suspend fun getMovies(result: Result) =
         personalCollection
-            .whereEqualTo("id",result.id)
-            .whereEqualTo("watched",result.isWatched)
+            .whereEqualTo("id", result.id)
+            .whereEqualTo("watched", result.isWatched)
 
     suspend fun getMoviesWatchLater(watchLater: Boolean, userId: String) =
         personalCollection
@@ -37,7 +37,6 @@ class FirebaseServiceRepository(context: Context) {
     suspend fun deleteWatchLater(result: Result) =
         personalCollection
             .whereEqualTo("id", result.id)
-
 
 
     companion object {

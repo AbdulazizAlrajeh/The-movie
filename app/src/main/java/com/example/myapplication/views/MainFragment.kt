@@ -22,8 +22,8 @@ private const val TAG = "MainFragment"
 class MainFragment : Fragment() {
     var loading = true
 
-private lateinit var recyclerView: RecyclerView
-private lateinit var progressBar: ProgressBar
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var progressBar: ProgressBar
 
     private var listOfMovies = listOf<Result>()
 
@@ -31,7 +31,7 @@ private lateinit var progressBar: ProgressBar
     private val moviesViewModel: MainViewModel by activityViewModels()
 
 
-    private lateinit var layoutManager : GridLayoutManager
+    private lateinit var layoutManager: GridLayoutManager
 
 
     override fun onCreateView(
@@ -39,17 +39,17 @@ private lateinit var progressBar: ProgressBar
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_main,container,false)
+        val view = inflater.inflate(R.layout.fragment_main, container, false)
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mainAdapter = MainAdapter(moviesViewModel, requireContext())
-        recyclerView = view.findViewById( R.id.main_recyclerview)
+        recyclerView = view.findViewById(R.id.main_recyclerview)
         progressBar = view.findViewById(R.id.main_progressbar)
         recyclerView.adapter = mainAdapter
-        layoutManager = GridLayoutManager(requireActivity(),3)
+        layoutManager = GridLayoutManager(requireActivity(), 3)
 
         recyclerView.layoutManager = layoutManager
         observers()
@@ -58,20 +58,21 @@ private lateinit var progressBar: ProgressBar
         addItemScroll()
 
     }
-    fun addItemScroll(){
+
+    fun addItemScroll() {
         var loading = true
         var pastVisiblesItems: Int
         var visibleItemCount: Int
         var totalItemCount: Int
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if (dy > 0){
+                if (dy > 0) {
                     visibleItemCount = recyclerView.getChildCount()
                     totalItemCount = recyclerView.layoutManager!!.getItemCount()
-                    pastVisiblesItems =  layoutManager.findFirstCompletelyVisibleItemPosition()
+                    pastVisiblesItems = layoutManager.findFirstCompletelyVisibleItemPosition()
 
-                    if (loading){
+                    if (loading) {
                         if (visibleItemCount + pastVisiblesItems >= totalItemCount) {
                             loading = false
                             Log.d("callMore", "Last Item Wow !")

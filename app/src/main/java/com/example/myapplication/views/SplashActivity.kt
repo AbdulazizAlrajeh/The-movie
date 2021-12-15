@@ -14,6 +14,7 @@ import com.example.myapplication.repository.FirebaseServiceRepository
 private lateinit var sharedPref: SharedPreferences
 
 private const val TAG = "SplashActivity"
+
 class SplashActivity : AppCompatActivity() {
     private var mDelayHandler: Handler? = null
     private val splashLong: Long = 5000 // five seconds
@@ -21,12 +22,12 @@ class SplashActivity : AppCompatActivity() {
         // for count the time
         if (!isFinishing) {
             sharedPref = this.getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
-            if (sharedPref.getBoolean("state login", false)){
+            if (sharedPref.getBoolean("state login", false)) {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
-                Log.d(TAG,sharedPref.getBoolean("state login", true).toString())
-            }else{
+                Log.d(TAG, sharedPref.getBoolean("state login", true).toString())
+            } else {
                 val intent = Intent(applicationContext, LogInActivity::class.java)
                 startActivity(intent)
                 finish()

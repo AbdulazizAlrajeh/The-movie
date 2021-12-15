@@ -7,7 +7,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.Exception
 
 private const val BASE_URL = "https://api.themoviedb.org"
-class ApiServiceRepository (val context: Context){
+
+class ApiServiceRepository(val context: Context) {
 
     // Retrofit.Builder
     // And we need to specify a factory for deserializing the response using the Gson library
@@ -18,10 +19,7 @@ class ApiServiceRepository (val context: Context){
     private val retrofitApi = retrofitService.create(MovieApi::class.java)
 
 
-    suspend fun getMovies(page:Int) = retrofitApi.getMovies(page)
-
-
-
+    suspend fun getMovies(page: Int) = retrofitApi.getMovies(page)
 
 
     /*
@@ -37,7 +35,7 @@ class ApiServiceRepository (val context: Context){
                 instance = ApiServiceRepository(context)
         }
 
-        fun get() : ApiServiceRepository {
+        fun get(): ApiServiceRepository {
             return instance ?: throw Exception("ApiServiceRepository must be initialized ")
         }
     }

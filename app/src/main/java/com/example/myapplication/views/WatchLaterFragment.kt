@@ -19,6 +19,7 @@ import com.example.myapplication.views.viewmodels.WatchLaterViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 private const val TAG = "WatchLaterFragment"
+
 class WatchLaterFragment : Fragment() {
 
     val userId = FirebaseAuth.getInstance().currentUser?.uid.toString()
@@ -63,7 +64,7 @@ class WatchLaterFragment : Fragment() {
 
         watchLaterViewModel.watchLaterMoviesLiveDataException.observe(viewLifecycleOwner, {
             it?.let {
-                Log.d("Error",it)
+                Log.d("Error", it)
                 Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
                 watchLaterViewModel.watchLaterMoviesLiveDataException.postValue(null)
             }

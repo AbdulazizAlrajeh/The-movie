@@ -15,7 +15,8 @@ import kotlinx.coroutines.withContext
 
 
 private const val TAG = "WatchLaterViewModel"
-class SaveToFirebaseViewModel:ViewModel() {
+
+class SaveToFirebaseViewModel : ViewModel() {
 
     private val firebaseRepository = FirebaseServiceRepository.get()
 
@@ -23,22 +24,22 @@ class SaveToFirebaseViewModel:ViewModel() {
     val saveToFirebaseLiveDataException = MutableLiveData<String>()
 
 
-    fun callSaveMovieToFirebase(result:Result) {
+    fun callSaveMovieToFirebase(result: Result) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = firebaseRepository.saveMovie(result)
 
-                    response.addOnCompleteListener {
-                        if (response.isSuccessful) {
-                                Log.d(TAG, it.toString())
-                            saveToFirebaseLiveDataCorrect.postValue("Successfully")
+                response.addOnCompleteListener {
+                    if (response.isSuccessful) {
+                        Log.d(TAG, it.toString())
+                        saveToFirebaseLiveDataCorrect.postValue("Successfully")
 
-                        } else {
-                            // Log.d(TAG, response.message().toString())
-                            Log.d(TAG, response.exception.toString())
-                            saveToFirebaseLiveDataException.postValue(response.exception.toString())
-                        }
+                    } else {
+                        // Log.d(TAG, response.message().toString())
+                        Log.d(TAG, response.exception.toString())
+                        saveToFirebaseLiveDataException.postValue(response.exception.toString())
                     }
+                }
             } catch (e: Exception) {
                 // Send Error Response to view
                 saveToFirebaseLiveDataException.postValue(e.message.toString())
