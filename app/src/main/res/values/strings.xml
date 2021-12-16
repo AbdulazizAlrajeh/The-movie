@@ -11,4 +11,5 @@
     <string name="email">Email</string>
     <string name="register">Register</string>
     <string name="loginInRegister">Already have the account?</string>
+    <string name="logout">Logout</string>
 </resources>

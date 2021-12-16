@@ -1,23 +1,29 @@
 package com.example.myapplication.views
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+import com.example.myapplication.R.id.action_bar
+import com.example.myapplication.R.id.logout_item
 import com.example.myapplication.adapterimport.MainAdapter
 import com.example.myapplication.views.viewmodels.MainViewModel
 import com.example.myapplication.models.Result
+import com.google.firebase.auth.FirebaseAuth
 
 
 private const val TAG = "MainFragment"
+private lateinit var sharedPref: SharedPreferences
+private lateinit var sharedPrefEditor: SharedPreferences.Editor
 
 class MainFragment : Fragment() {
     var loading = true
@@ -45,17 +51,53 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
         mainAdapter = MainAdapter(moviesViewModel, requireContext())
         recyclerView = view.findViewById(R.id.main_recyclerview)
         progressBar = view.findViewById(R.id.main_progressbar)
         recyclerView.adapter = mainAdapter
         layoutManager = GridLayoutManager(requireActivity(), 3)
-
         recyclerView.layoutManager = layoutManager
         observers()
 
         moviesViewModel.callGetMovies()
         addItemScroll()
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        requireActivity().menuInflater.inflate(R.menu.bar_menu,menu)
+        super.onCreateOptionsMenu(menu, inflater)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            logout_item -> {
+                val alertDialog = android.app.AlertDialog.Builder(context).setTitle("Logout")
+                    .setMessage("Are you sure you want to logout ?")
+                alertDialog.setPositiveButton("Logout") { _, _ ->
+                    Log.i(TAG, "logout")
+                    FirebaseAuth.getInstance().signOut()
+
+                    this?.let {
+                        val intent = Intent(it.requireActivity(), LogInActivity::class.java)
+                        it.startActivity(intent)
+
+                    }
+                    sharedPref = requireActivity().getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
+                    sharedPrefEditor = sharedPref.edit()
+                    sharedPrefEditor.putBoolean("state", false)
+                    sharedPrefEditor.commit()
+                }
+                alertDialog.setNegativeButton("Cancel") { dialog, _ ->
+                    dialog.cancel()
+                }
+                alertDialog.show()
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
 
     }
 
