@@ -114,8 +114,11 @@ class MainFragment : Fragment() {
                     totalItemCount = recyclerView.layoutManager!!.getItemCount()
                     pastVisiblesItems = layoutManager.findFirstCompletelyVisibleItemPosition()
 
+                    Log.d("loadvalue",loading.toString())
                     if (loading) {
                         if (visibleItemCount + pastVisiblesItems >= totalItemCount) {
+                            Log.d("Loading",loading.toString())
+
                             loading = false
                             Log.d("callMore", "Last Item Wow !")
                             progressBar.visibility = View.VISIBLE
@@ -130,14 +133,15 @@ class MainFragment : Fragment() {
 
     fun observers() {
         moviesViewModel.moviesLiveDate.observe(viewLifecycleOwner, {
-            loading = true
             Log.d(TAG, it.toString())
             progressBar.animate().alpha(0f).setDuration(1000)
             mainAdapter.submitList(it)
             listOfMovies = it
             recyclerView.animate().alpha(1f)
             Log.d(TAG, it.toString())
+            Log.d("LoadingChange",loading.toString())
 
+            loading = true
         })
 
         moviesViewModel.moviesErrorLiveData.observe(viewLifecycleOwner, {
