@@ -11,6 +11,6 @@
         android:title="@string/watched_later" />
     <item
         android:id="@+id/watchedFragment"
-        android:icon="@drawable/watched"
+        android:icon="@drawable/ic_watched"
         android:title="@string/watched" />
 </menu>

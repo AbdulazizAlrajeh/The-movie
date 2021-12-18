@@ -1,6 +1,7 @@
 package com.example.myapplication.adapterimport
 
 import android.content.Context
+import android.content.Intent
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 
@@ -52,9 +53,9 @@ class WatchLaterAdapter(val viewmodel: WatchLaterViewModel, val context: Context
     override fun onBindViewHolder(holder: ViewModeler, position: Int) {
         val item = differ.currentList[position]
         val newResult = mutableMapOf<String, Any>()
-
+        val uri = "https://image.tmdb.org/t/p/w500/${item.posterPath}"
         Glide.with(context)
-            .load("https://image.tmdb.org/t/p/w500/${item.posterPath}")
+            .load(uri)
             .into(holder.imageMove)
         holder.movieName.text = "Movie: ${item.title}"
         holder.descriptionMovie.text = "Overview: ${item.overview}"
@@ -69,6 +70,12 @@ class WatchLaterAdapter(val viewmodel: WatchLaterViewModel, val context: Context
         holder.deleteButton.setOnClickListener {
             item.iswatchedLater = false
             viewmodel.deleteItem(item)
+        }
+        holder.shareImage.setOnClickListener {
+            val share = Intent(Intent.ACTION_SEND)
+            share.type = "image/*"
+            share.putExtra(Intent.EXTRA_STREAM, uri)
+            context.startActivity(Intent.createChooser(share, "Share via"))
         }
 
     }
@@ -90,5 +97,6 @@ class WatchLaterAdapter(val viewmodel: WatchLaterViewModel, val context: Context
         val descriptionMovie: TextView = itemView.findViewById(R.id.description_textView)
         val watchedButton: ImageButton = itemView.findViewById(R.id.eye_imageButton)
         val deleteButton: ImageButton = itemView.findViewById(R.id.delete_imageButton)
+        val shareImage  : ImageButton = itemView.findViewById(R.id.share_imageButton)
     }
 }

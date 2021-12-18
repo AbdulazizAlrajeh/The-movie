@@ -23,18 +23,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:paddingBottom="30dp"
         android:text="TextView"
-        android:textSize="14sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/details_description_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:paddingBottom="30dp"
         android:text="TextView"
-        android:textSize="10sp" />
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/date_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="TextView"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/details_watch_later_button"
