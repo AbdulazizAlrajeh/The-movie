@@ -1,5 +1,6 @@
 package com.example.myapplication.views
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -17,6 +19,7 @@ import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.views.viewmodels.MainViewModel
 import com.example.myapplication.models.Result
+import com.example.myapplication.util.DateConvert
 import com.example.myapplication.views.viewmodels.SaveToFirebaseViewModel
 import com.example.myapplication.views.viewmodels.WatchLaterViewModel
 import com.example.myapplication.views.viewmodels.WatchedViewModel
@@ -28,7 +31,7 @@ class DetailsItemFragment : Fragment() {
     val userId = FirebaseAuth.getInstance().currentUser?.uid.toString()
     private val moviesViewModel: MainViewModel by activityViewModels()
     private val WatchLaterViewModel: SaveToFirebaseViewModel by activityViewModels()
-
+    val dateConvert = DateConvert()
     private lateinit var selectItemModel: Result
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,12 +41,14 @@ class DetailsItemFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_details_item, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val imageMovie: ImageView = view.findViewById(R.id.details_item_imageView)
         val nameOfMovie: TextView = view.findViewById(R.id.details_name_textView)
         val descriptionOfMovie: TextView = view.findViewById(R.id.details_description_textView)
+        val dateMovie : TextView = view.findViewById(R.id.date_textView)
         val wathcedLater: Button = view.findViewById(R.id.details_watch_later_button)
         val watched: Button = view.findViewById(R.id.details_watched_button)
         observers()
@@ -53,6 +58,8 @@ class DetailsItemFragment : Fragment() {
                 .into(imageMovie)
             nameOfMovie.text = "Name The Movie: ${it.title}"
             descriptionOfMovie.text = "Description:\n\t${it.overview}"
+            val date = dateConvert.convertDataUsing_YY_MM_dd_("${it.releaseDate}")
+            dateMovie.text = "Date:${date}"
             selectItemModel = it
         })
 
