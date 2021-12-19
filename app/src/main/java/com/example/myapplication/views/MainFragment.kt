@@ -13,7 +13,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.R.id.action_bar
 import com.example.myapplication.R.id.logout_item
 import com.example.myapplication.adapterimport.MainAdapter
 import com.example.myapplication.views.viewmodels.MainViewModel
