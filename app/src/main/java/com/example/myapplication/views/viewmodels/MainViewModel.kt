@@ -19,28 +19,34 @@ class MainViewModel : ViewModel() {
     var selectedItemMutableLiveData = MutableLiveData<Result>()
 
     var page = 1
+    var pages = 10
+
 
     val moviesLiveDate = MutableLiveData<List<Result>>()
     val moviesErrorLiveData = MutableLiveData<String>()
+    val mutableListCurrent = mutableListOf<Result>()
 
     fun callGetMovies() {
         Log.d(TAG, "$page")
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = repositoryAPI.getMovies(page)
-                if (response.isSuccessful) {
-                    response.body()?.run {
-                        Log.d(TAG, this.toString())
+                if (page < pages) {
+                    val response = repositoryAPI.getMovies(page)
+                    if (response.isSuccessful) {
+                        response.body()?.run {
+                            Log.d(TAG, this.toString())
+                            pages = this.totalPages
+                            mutableListCurrent.addAll(results)
+                            // Send Response to view
+                            moviesLiveDate.postValue(mutableListCurrent)
+                        }
+                        page += 1
 
-                        // Send Response to view
-                        moviesLiveDate.postValue(results)
+                    } else {
+                        Log.d(TAG, response.message().toString())
+
+                        moviesErrorLiveData.postValue(response.message())
                     }
-                    page += 1
-
-                } else {
-                    Log.d(TAG, response.message().toString())
-
-                    moviesErrorLiveData.postValue(response.message())
                 }
             } catch (e: Exception) {
                 // Send Error Response to view

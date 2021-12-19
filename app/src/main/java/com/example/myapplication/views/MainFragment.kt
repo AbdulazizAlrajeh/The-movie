@@ -25,12 +25,12 @@ private lateinit var sharedPref: SharedPreferences
 private lateinit var sharedPrefEditor: SharedPreferences.Editor
 
 class MainFragment : Fragment() {
-    var loading = true
+    var loading = false
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
 
-    private var listOfMovies = listOf<Result>()
+    private var listOfMovies = mutableListOf<Result>()
 
     private lateinit var mainAdapter: MainAdapter
     private val moviesViewModel: MainViewModel by activityViewModels()
@@ -101,7 +101,6 @@ class MainFragment : Fragment() {
     }
 
     fun addItemScroll() {
-        var loading = true
         var pastVisiblesItems: Int
         var visibleItemCount: Int
         var totalItemCount: Int
@@ -113,12 +112,15 @@ class MainFragment : Fragment() {
                     totalItemCount = recyclerView.layoutManager!!.getItemCount()
                     pastVisiblesItems = layoutManager.findFirstCompletelyVisibleItemPosition()
 
-                    Log.d("loadvalue",loading.toString())
-                    if (loading) {
+
+
+                    if (!loading) {
+                        Log.d("loadvalue",loading.toString())
+
                         if (visibleItemCount + pastVisiblesItems >= totalItemCount) {
                             Log.d("Loading",loading.toString())
 
-                            loading = false
+                            loading = true
                             Log.d("callMore", "Last Item Wow !")
                             progressBar.visibility = View.VISIBLE
                             moviesViewModel.callGetMovies()
@@ -135,12 +137,12 @@ class MainFragment : Fragment() {
             Log.d(TAG, it.toString())
             progressBar.animate().alpha(0f).setDuration(1000)
             mainAdapter.submitList(it)
-            listOfMovies = it
+           // listOfMovies = it
             recyclerView.animate().alpha(1f)
             Log.d(TAG, it.toString())
             Log.d("LoadingChange",loading.toString())
 
-            loading = true
+            loading = false
         })
 
         moviesViewModel.moviesErrorLiveData.observe(viewLifecycleOwner, {
