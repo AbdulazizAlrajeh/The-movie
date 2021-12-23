@@ -93,7 +93,7 @@ class WatchLaterAdapter(val viewmodel: WatchLaterViewModel, val context: Context
     class ViewModeler(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val imageMove: ImageView = itemView.findViewById(R.id.imageView)
-        val movieName: TextView = itemView.findViewById(R.id.login_title_textView)
+        val movieName: TextView = itemView.findViewById(R.id.watchlater_title_textView)
         val descriptionMovie: TextView = itemView.findViewById(R.id.description_textView)
         val watchedButton: ImageButton = itemView.findViewById(R.id.eye_imageButton)
         val deleteButton: ImageButton = itemView.findViewById(R.id.delete_imageButton)
