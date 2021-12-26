@@ -57,4 +57,8 @@ class MainActivity : AppCompatActivity() {
             maneger.createNotificationChannel(channel)
         }
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp()
+    }
 }

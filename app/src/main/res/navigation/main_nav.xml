@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/detailsItemFragment"
         android:name="com.example.myapplication.views.DetailsItemFragment"
-        android:label="fragment_details_item"
-        tools:layout="@layout/fragment_details_item" >
+        android:label="@string/details_movie"
+        tools:layout="@layout/fragment_details_item">
         <action
             android:id="@+id/action_detailsItemFragment_to_watchLaterFragment"
             app:destination="@id/watchLaterFragment" />
@@ -23,13 +23,13 @@
     <fragment
         android:id="@+id/watchLaterFragment"
         android:name="com.example.myapplication.views.WatchLaterFragment"
-        android:label="fragment_watch_later"
+        android:label="@string/watch_later_movies"
         tools:layout="@layout/fragment_watch_later" />
     <fragment
         android:id="@+id/watchedFragment"
         android:name="com.example.myapplication.views.WatchedFragment"
-        android:label="fragment_watched"
-        tools:layout="@layout/fragment_watched" >
+        android:label="@string/watched_movies"
+        tools:layout="@layout/fragment_watched">
         <action
             android:id="@+id/action_watchedFragment_to_detailsWatchedFragment"
             app:destination="@id/detailsWatchedFragment" />
@@ -37,13 +37,13 @@
     <fragment
         android:id="@+id/detailsWatchedFragment"
         android:name="com.example.myapplication.views.DetailsWatchedFragment"
-        android:label="fragment_details_watched"
+        android:label="@string/details_movie"
         tools:layout="@layout/fragment_details_watched" />
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.myapplication.views.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        android:label="@string/movies"
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment2_to_detailsItemFragment"
             app:destination="@id/detailsItemFragment" />

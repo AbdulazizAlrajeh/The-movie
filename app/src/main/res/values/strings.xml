@@ -12,4 +12,8 @@
     <string name="register">Register</string>
     <string name="loginInRegister">Already have the account?</string>
     <string name="logout">Logout</string>
+    <string name="watched_movies">watched movies</string>
+    <string name="watch_later_movies">watch later</string>
+    <string name="movies">movies</string>
+    <string name="details_movie">detail</string>
 </resources>

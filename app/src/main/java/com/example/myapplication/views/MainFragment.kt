@@ -9,6 +9,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -67,6 +68,41 @@ class MainFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         requireActivity().menuInflater.inflate(R.menu.bar_menu,menu)
         super.onCreateOptionsMenu(menu, inflater)
+        val searchItem = menu.findItem(R.id.app_bar_search)
+        val searchView = searchItem.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                mainAdapter.submitList(
+                    listOfMovies.filter {
+                        it.title?.lowercase()!!.contains(query!!.lowercase())
+                    }
+                )
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+//                productAdapter.submitList(
+//                    allProducts.filter {
+//                        it.description.lowercase().contains(newText!!.lowercase())
+//                    }
+//                )
+                return true
+            }
+
+        })
+
+        searchItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
+                mainAdapter.submitList(listOfMovies)
+                return true
+            }
+
+        })
+
 
     }
 
@@ -137,7 +173,7 @@ class MainFragment : Fragment() {
             Log.d(TAG, it.toString())
             progressBar.animate().alpha(0f).setDuration(1000)
             mainAdapter.submitList(it)
-           // listOfMovies = it
+            listOfMovies = it as MutableList<Result>
             recyclerView.animate().alpha(1f)
             Log.d(TAG, it.toString())
             Log.d("LoadingChange",loading.toString())
