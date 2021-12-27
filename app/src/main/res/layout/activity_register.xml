@@ -36,6 +36,8 @@
             android:id="@+id/register_email_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="30dp"
             android:ems="10"
             android:hint="@string/email"
@@ -46,6 +48,8 @@
             android:id="@+id/register_password_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="50dp"
             android:ems="10"
             android:hint="@string/password"
@@ -56,6 +60,8 @@
             android:id="@+id/register_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:backgroundTint="@color/button_color"
             android:text="@string/register" />
@@ -66,6 +72,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/registerInLogin"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="20sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

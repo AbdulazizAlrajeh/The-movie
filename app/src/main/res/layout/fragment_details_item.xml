@@ -5,7 +5,6 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
     android:backgroundTint="@color/background"
     android:orientation="vertical"
     tools:context=".views.DetailsItemFragment">
@@ -14,6 +13,7 @@
         android:id="@+id/details_item_imageView"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"
         android:scaleType="fitCenter"
         tools:src="@tools:sample/avatars" />
@@ -22,6 +22,8 @@
         android:id="@+id/details_name_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="30dp"
         android:text="TextView"
         android:textSize="20sp" />
@@ -30,6 +32,8 @@
         android:id="@+id/details_description_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="30dp"
         android:text="TextView"
         android:textSize="16sp" />
@@ -38,6 +42,8 @@
         android:id="@+id/date_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="30dp"
         android:text="TextView"
         android:textSize="16sp" />
@@ -46,6 +52,8 @@
         android:id="@+id/details_watch_later_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/button_color"
         android:paddingBottom="15dp"
@@ -55,6 +63,8 @@
         android:id="@+id/details_watched_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:backgroundTint="@color/button_color"
         android:text="@string/watched" />
 </LinearLayout>

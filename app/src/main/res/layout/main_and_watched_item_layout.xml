@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:scaleType="fitCenter"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@drawable/ic_images" />
 
         <TextView
             android:id="@+id/main_item_textview"
