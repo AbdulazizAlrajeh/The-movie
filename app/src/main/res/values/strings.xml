@@ -16,4 +16,5 @@
     <string name="watch_later_movies">watch later</string>
     <string name="movies">movies</string>
     <string name="details_movie">detail</string>
+    <string name="name_of_application">The Movies</string>
 </resources>
