@@ -16,12 +16,6 @@ import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.example.myapplication.models.Result
 import com.example.myapplication.views.viewmodels.WatchLaterViewModel
-import com.google.firebase.firestore.SetOptions
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class WatchLaterAdapter(val viewmodel: WatchLaterViewModel, val context: Context) :
     RecyclerView.Adapter<WatchLaterAdapter.ViewModeler>() {
@@ -61,15 +55,21 @@ class WatchLaterAdapter(val viewmodel: WatchLaterViewModel, val context: Context
         holder.descriptionMovie.text = "Overview: ${item.overview}"
 
         holder.watchedButton.setOnClickListener {
+            val list = differ.currentList
 
             newResult["watched"] = true
             newResult["iswatchedLater"] = false
+            updatelist(list,position)
             viewmodel.updateItem(item, newResult)
         }
 
         holder.deleteButton.setOnClickListener {
-            item.iswatchedLater = false
+            val list = differ.currentList
+            updatelist(list,position)
+            /*differ.currentList.removeAt(position)
+            item.iswatchedLater = false*/
             viewmodel.deleteItem(item)
+
         }
         holder.shareImage.setOnClickListener {
             val share = Intent(Intent.ACTION_SEND)
@@ -89,7 +89,13 @@ class WatchLaterAdapter(val viewmodel: WatchLaterViewModel, val context: Context
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
+    fun updatelist(list: MutableList<Result>, position: Int){
+        var list = mutableListOf<Result>()
+        list.addAll(differ.currentList)
+        list.removeAt(position)
+        differ.submitList(list)
 
+    }
     class ViewModeler(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val imageMove: ImageView = itemView.findViewById(R.id.imageView)

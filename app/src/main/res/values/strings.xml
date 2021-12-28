@@ -17,4 +17,7 @@
     <string name="movies">movies</string>
     <string name="details_movie">detail</string>
     <string name="name_of_application">The Movies</string>
+    <string name="empty_list">The list is empty</string>
+    <string name="password_empty">Password should be not empty</string>
+    <string name="email_empty">Email should be not empty</string>
 </resources>

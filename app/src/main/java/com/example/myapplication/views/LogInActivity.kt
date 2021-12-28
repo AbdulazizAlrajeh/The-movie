@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -27,6 +28,8 @@ class LogInActivity : AppCompatActivity() {
         val passwordLogIn: EditText = findViewById(R.id.login_password_edittext)
         val buttonLogIn: Button = findViewById(R.id.login_button)
         val registerInLogin: TextView = findViewById(R.id.login_register_textView)
+        val errorTextView:TextView = findViewById(R.id.error_textView)
+
 
         registerInLogin.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
@@ -64,23 +67,19 @@ class LogInActivity : AppCompatActivity() {
                                 startActivity(intent)
                                 finish()
                             } else {
-                                Toast.makeText(
-                                    this, it.exception!!.message.toString(),
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                errorTextView.text = it.exception!!.message.toString()
+                                errorTextView.visibility = View.VISIBLE
                             }
                         }
                 } else {
-                    Toast.makeText(
-                        this, "Password should be not empty",
-                        Toast.LENGTH_SHORT
-                    ).show()
+
+                    errorTextView.text = getString(R.string.password_empty)
+                    errorTextView.visibility = View.VISIBLE
                 }
             } else {
-                Toast.makeText(
-                    this, "Email should be not empty",
-                    Toast.LENGTH_SHORT
-                ).show()
+                errorTextView.text = getString(R.string.email_empty)
+                errorTextView.visibility = View.VISIBLE
+
             }
         }
     }
