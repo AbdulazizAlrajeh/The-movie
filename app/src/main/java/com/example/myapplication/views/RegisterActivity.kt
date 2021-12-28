@@ -3,6 +3,7 @@ package com.example.myapplication.views
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -21,6 +22,7 @@ class RegisterActivity : AppCompatActivity() {
         val passwordRegister: EditText = findViewById(R.id.register_password_edittext)
         val buttonRegister: Button = findViewById(R.id.register_button)
         val loginInRegister: TextView = findViewById(R.id.register_login_textView)
+        val errorTextView: TextView = findViewById(R.id.error_textView)
         val validation = ValidationEmailAndPassword()
         loginInRegister.setOnClickListener {
             startActivity(Intent(this, LogInActivity::class.java))
@@ -49,30 +51,22 @@ class RegisterActivity : AppCompatActivity() {
                                     finish()
 
                                 } else {
-                                    Toast.makeText(
-                                        this,
-                                        it.exception!!.message.toString(),
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                    errorTextView.text = it.exception!!.message.toString()
+                                    errorTextView.visibility = View.VISIBLE
                                 }
                             }
                     } else {
-                        Toast.makeText(
-                            this, "Password should be not empty",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        errorTextView.text = getString(R.string.password_empty)
+                        errorTextView.visibility = View.VISIBLE
                     }
                 } else {
-                    Toast.makeText(
-                        this, "Email should be not empty",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    errorTextView.text = getString(R.string.email_empty)
+                    errorTextView.visibility = View.VISIBLE
                 }
             } else {
-                Toast.makeText(
-                    this, "email or password is not validate",
-                    Toast.LENGTH_SHORT
-                ).show()
+                errorTextView.text = getString(R.string.not_validate)
+                errorTextView.visibility = View.VISIBLE
+
             }
         }
     }

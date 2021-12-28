@@ -56,6 +56,13 @@
             android:inputType="textPassword"
             tools:ignore="TouchTargetSizeCheck" />
 
+        <TextView
+            android:id="@+id/error_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:visibility="invisible" />
+
         <Button
             android:id="@+id/register_button"
             android:layout_width="match_parent"
@@ -74,5 +81,6 @@
             android:text="@string/registerInLogin"
             android:textColor="@color/black"
             android:textSize="20sp" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

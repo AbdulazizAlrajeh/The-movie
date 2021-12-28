@@ -59,13 +59,13 @@ class WatchLaterAdapter(val viewmodel: WatchLaterViewModel, val context: Context
 
             newResult["watched"] = true
             newResult["iswatchedLater"] = false
-            updatelist(list,position)
+            updatelist(list,item)
             viewmodel.updateItem(item, newResult)
         }
 
         holder.deleteButton.setOnClickListener {
             val list = differ.currentList
-            updatelist(list,position)
+            updatelist(list,item)
             /*differ.currentList.removeAt(position)
             item.iswatchedLater = false*/
             viewmodel.deleteItem(item)
@@ -89,10 +89,10 @@ class WatchLaterAdapter(val viewmodel: WatchLaterViewModel, val context: Context
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
-    fun updatelist(list: MutableList<Result>, position: Int){
+    fun updatelist(list: MutableList<Result>, item: Result){
         var list = mutableListOf<Result>()
         list.addAll(differ.currentList)
-        list.removeAt(position)
+        list.remove(item)
         differ.submitList(list)
 
     }
