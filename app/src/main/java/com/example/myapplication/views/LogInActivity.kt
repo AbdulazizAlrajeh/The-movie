@@ -33,7 +33,6 @@ class LogInActivity : AppCompatActivity() {
 
         registerInLogin.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
-            finish()
         }
 
         buttonLogIn.setOnClickListener {

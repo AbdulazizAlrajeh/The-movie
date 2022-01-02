@@ -26,7 +26,6 @@ class RegisterActivity : AppCompatActivity() {
         val validation = ValidationEmailAndPassword()
         loginInRegister.setOnClickListener {
             startActivity(Intent(this, LogInActivity::class.java))
-            finish()
         }
 
         buttonRegister.setOnClickListener {

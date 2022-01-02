@@ -12,11 +12,6 @@ class FirebaseServiceRepository(context: Context) {
     suspend fun saveMovie(result: Result) =
         personalCollection.add(result)
 
-    suspend fun getMovies(result: Result) =
-        personalCollection
-            .whereEqualTo("id", result.id)
-            .whereEqualTo("watched", result.isWatched)
-
     suspend fun getMoviesWatchLater(watchLater: Boolean, userId: String) =
         personalCollection
 
