@@ -2,6 +2,10 @@ package com.example.myapplication.adapterimport
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.net.Uri
+import android.provider.MediaStore
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 
@@ -16,6 +20,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.example.myapplication.models.Result
 import com.example.myapplication.views.viewmodels.WatchLaterViewModel
+import java.io.ByteArrayOutputStream
 
 class WatchLaterAdapter(val viewmodel: WatchLaterViewModel, val context: Context) :
     RecyclerView.Adapter<WatchLaterAdapter.ViewModeler>() {
@@ -72,10 +77,14 @@ class WatchLaterAdapter(val viewmodel: WatchLaterViewModel, val context: Context
 
         }
         holder.shareImage.setOnClickListener {
+           val bitmab = ShareImageUtil.getBitmapFromView(holder.imageMove)
+            val uri = ShareImageUtil.getImageUri(context,bitmab!!)
+
             val share = Intent(Intent.ACTION_SEND)
             share.type = "image/*"
-            share.putExtra(Intent.EXTRA_STREAM, uri)
+            share.putExtra(Intent.EXTRA_STREAM,uri)
             context.startActivity(Intent.createChooser(share, "Share via"))
+
         }
 
     }
@@ -104,5 +113,26 @@ class WatchLaterAdapter(val viewmodel: WatchLaterViewModel, val context: Context
         val watchedButton: ImageButton = itemView.findViewById(R.id.eye_imageButton)
         val deleteButton: ImageButton = itemView.findViewById(R.id.delete_imageButton)
         val shareImage  : ImageButton = itemView.findViewById(R.id.share_imageButton)
+    }
+
+    object ShareImageUtil {
+        fun shareImage(imageView: ImageView, context: Context) {
+            val image: Bitmap? = getBitmapFromView(imageView)
+
+
+        }
+
+        fun getBitmapFromView(view: ImageView): Bitmap? {
+            val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap)
+            view.draw(canvas)
+            return bitmap
+        }
+        fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
+            val bytes = ByteArrayOutputStream()
+            inImage.compress(Bitmap.CompressFormat.JPEG,100,bytes)
+            val path = MediaStore.Images.Media.insertImage(inContext.contentResolver, inImage, "title",null)
+            return Uri.parse(path)
+        }
     }
 }

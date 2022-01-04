@@ -54,13 +54,15 @@ class WatchLaterFragment : Fragment() {
 
     fun observers() {
         watchLaterViewModel.watchLaterLiveData.observe(viewLifecycleOwner, {
-            if (it.isNotEmpty() || it != null) {
+            if (it.isNotEmpty()) {
                 Log.d("List", it.toString())
                 binding.watchLaterProgressBar.animate().alpha(0f).setDuration(1000)
                 watchLaterAdapter.submitList(it)
                 binding.watchLaterRecyclerView.animate().alpha(1f)
                 Log.d("List", it.toString())
             }else{
+                Log.d("ListElse", it.toString())
+                binding.watchLaterProgressBar.animate().alpha(0f).setDuration(1000)
                 binding.emptyTextView.visibility = View.VISIBLE
             }
 

@@ -47,13 +47,14 @@ class WatchedFragment : Fragment() {
 
     fun observers() {
         watchedViewModel.watchedLiveData.observe(viewLifecycleOwner, {
-            if (it.isNotEmpty() || it != null) {
+            if (it.isNotEmpty()) {
                 Log.d(TAG, it.toString())
                 binding.watchedProgressBar.animate().alpha(0f).setDuration(1000)
                 watchedSameMainAdapter.submitList(it)
                 binding.watchedRecyclerview.animate().alpha(1f)
                 Log.d(TAG, it.toString())
             }else{
+                Log.d(TAG, it.toString())
                 binding.emptyTextView.visibility = View.VISIBLE
             }
 
