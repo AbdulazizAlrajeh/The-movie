@@ -1,4 +1,4 @@
-package com.example.myapplication.views
+package com.example.myapplication.views.mainFragment
 
 import android.content.Context
 import android.content.Intent
@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.R.id.logout_item
-import com.example.myapplication.adapterimport.MainAdapter
-import com.example.myapplication.views.viewmodels.MainViewModel
 import com.example.myapplication.models.Result
+import com.example.myapplication.views.logInActivity.LogInActivity
+import com.example.myapplication.views.logInActivity.SHARED_PREF_FILE
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -81,11 +81,6 @@ class MainFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-//                productAdapter.submitList(
-//                    allProducts.filter {
-//                        it.description.lowercase().contains(newText!!.lowercase())
-//                    }
-//                )
                 return true
             }
 

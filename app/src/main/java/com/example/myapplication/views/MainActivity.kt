@@ -14,7 +14,6 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityMainBinding
-import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

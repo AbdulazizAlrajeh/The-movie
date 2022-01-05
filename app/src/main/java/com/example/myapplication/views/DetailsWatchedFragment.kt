@@ -8,11 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
-import com.example.myapplication.R
-import com.example.myapplication.adapterimport.WatchedAdapter
 import com.example.myapplication.databinding.FragmentDetailsWatchedBinding
-import com.example.myapplication.databinding.FragmentWatchedBinding
-import com.example.myapplication.views.viewmodels.WatchedViewModel
+import com.example.myapplication.views.watchedFragment.WatchedViewModel
 
 
 class DetailsWatchedFragment : Fragment() {

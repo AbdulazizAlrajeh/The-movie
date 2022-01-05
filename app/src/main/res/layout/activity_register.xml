@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".views.RegisterActivity">
+    tools:context=".views.registerActivity.RegisterActivity">
 
     <TextView
         android:id="@+id/register_title_textView"
@@ -39,9 +39,12 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/button_color"
+            android:backgroundTintMode="src_over"
             android:ems="10"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
+            android:singleLine="false"
             tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
@@ -51,15 +54,52 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="50dp"
+            android:backgroundTint="@color/button_color"
+            android:backgroundTintMode="src_over"
             android:ems="10"
             android:hint="@string/password"
             android:inputType="textPassword"
             tools:ignore="TouchTargetSizeCheck" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="30dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/firstname_editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/button_color"
+                android:backgroundTintMode="src_over"
+                android:ems="10"
+                android:hint="@string/first_name"
+                android:inputType="textPersonName"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <EditText
+                android:id="@+id/lastname_editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/button_color"
+                android:backgroundTintMode="src_over"
+                android:ems="10"
+                android:hint="@string/last_name"
+                android:inputType="textPersonName"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        </LinearLayout>
+
         <TextView
             android:id="@+id/error_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/red"
             android:textSize="20sp"
             android:visibility="invisible" />
 

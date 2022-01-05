@@ -1,4 +1,4 @@
-package com.example.myapplication.views.viewmodels
+package com.example.myapplication.views.mainFragment
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -14,7 +14,7 @@ private const val TAG = "MainViewModel"
 class MainViewModel : ViewModel() {
 
     // Getting instance from Api Service Repository with companion object function
-    private val repositoryAPI = ApiServiceRepository.get()
+    private val repositoryAPI = ApiServiceRepository
 
     var selectedItemMutableLiveData = MutableLiveData<Result>()
 

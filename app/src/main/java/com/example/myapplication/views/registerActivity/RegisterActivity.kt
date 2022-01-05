@@ -1,27 +1,37 @@
-package com.example.myapplication.views
+package com.example.myapplication.views.registerActivity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.example.myapplication.R
 import com.example.myapplication.util.ValidationEmailAndPassword
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.example.myapplication.views.logInActivity.LogInActivity
+
 
 class RegisterActivity : AppCompatActivity() {
+
+    private val registerViewModel: RegisterViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
+        observers()
 
         val emailRegister: EditText = findViewById(R.id.register_email_edittext)
         val passwordRegister: EditText = findViewById(R.id.register_password_edittext)
         val buttonRegister: Button = findViewById(R.id.register_button)
         val loginInRegister: TextView = findViewById(R.id.register_login_textView)
+        val firstNameEditText:EditText = findViewById(R.id.firstname_editText)
+        val lastNameEditText:EditText = findViewById(R.id.lastname_editText)
         val errorTextView: TextView = findViewById(R.id.error_textView)
         val validation = ValidationEmailAndPassword()
         loginInRegister.setOnClickListener {
@@ -31,29 +41,14 @@ class RegisterActivity : AppCompatActivity() {
         buttonRegister.setOnClickListener {
             val email = emailRegister.text.toString()
             val password = passwordRegister.text.toString()
-
+            val firstName = firstNameEditText.text.toString()
+            val lastName = lastNameEditText.text.toString()
 
             if (validation.emailIsValid(email) && validation.passwordIsValid(password)) {
                 if (email.isNotEmpty() && email.isNotBlank()) {
                     if (password.isNotEmpty() && password.isNotBlank()) {
-                        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-                            .addOnCompleteListener {
-                                if (it.isSuccessful) {
-                                    val firebaseUser: FirebaseUser = it.result!!.user!!
+                        registerViewModel.callSaveUser(email,password,firstName,lastName)
 
-
-                                    val intent = Intent(this, MainActivity::class.java)
-                                    intent.putExtra("UserId", firebaseUser.uid)
-                                    intent.putExtra("Email", firebaseUser.email)
-
-                                    startActivity(intent)
-                                    finish()
-
-                                } else {
-                                    errorTextView.text = it.exception!!.message.toString()
-                                    errorTextView.visibility = View.VISIBLE
-                                }
-                            }
                     } else {
                         errorTextView.text = getString(R.string.password_empty)
                         errorTextView.visibility = View.VISIBLE
@@ -68,5 +63,23 @@ class RegisterActivity : AppCompatActivity() {
 
             }
         }
+    }
+
+    fun observers(){
+        registerViewModel.firebaseAuthCorrectLiveData.observe(this, Observer {
+            it?.let {
+                Log.d("True", it)
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+
+                val intent = Intent(this, LogInActivity::class.java)
+                startActivity(intent)
+            }
+        })
+
+        registerViewModel.firebaseAuthExceptionLiveData.observe(this, Observer {
+            Log.d("Error", it)
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            registerViewModel.firebaseAuthExceptionLiveData.postValue(null)
+        })
     }
 }

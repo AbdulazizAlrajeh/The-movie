@@ -1,4 +1,4 @@
-package com.example.myapplication.views.viewmodels
+package com.example.myapplication.views.watchLaterFragment
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -15,7 +15,7 @@ private const val TAG = "WatchLaterViewModel"
 
 class WatchLaterViewModel : ViewModel() {
 
-    private val firebaseRepository = FirebaseServiceRepository.get()
+    private val firebaseRepository = FirebaseServiceRepository
 
     val watchLaterLiveData = MutableLiveData<List<Result>>()
     val watchLaterMoviesLiveDataException = MutableLiveData<String>()

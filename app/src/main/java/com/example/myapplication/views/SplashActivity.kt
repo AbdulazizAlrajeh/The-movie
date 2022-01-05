@@ -7,9 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.myapplication.R
 import com.example.myapplication.repository.ApiServiceRepository
+import com.example.myapplication.repository.FirebaseAuthServiceRepository
 import com.example.myapplication.repository.FirebaseServiceRepository
+import com.example.myapplication.views.logInActivity.LogInActivity
+import com.example.myapplication.views.logInActivity.SHARED_PREF_FILE
 
 private lateinit var sharedPref: SharedPreferences
 
@@ -37,10 +41,10 @@ class SplashActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        ApiServiceRepository.init(this)
-        FirebaseServiceRepository.init(this)
+
 
         window.navigationBarColor = this.resources.getColor(R.color.background)
         mDelayHandler = Handler()

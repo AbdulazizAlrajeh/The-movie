@@ -21,4 +21,8 @@
     <string name="password_empty">Password should be not empty</string>
     <string name="email_empty">Email should be not empty</string>
     <string name="not_validate">email or password is not validate</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="username">Username</string>
+    <string name="save">Save</string>
 </resources>

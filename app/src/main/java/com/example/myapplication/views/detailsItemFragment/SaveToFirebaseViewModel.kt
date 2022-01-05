@@ -1,4 +1,4 @@
-package com.example.myapplication.views.viewmodels
+package com.example.myapplication.views.detailsItemFragment
 
 import android.util.Log
 import android.widget.Toast
@@ -18,7 +18,7 @@ private const val TAG = "WatchLaterViewModel"
 
 class SaveToFirebaseViewModel : ViewModel() {
 
-    private val firebaseRepository = FirebaseServiceRepository.get()
+    private val firebaseRepository = FirebaseServiceRepository
 
     val saveToFirebaseLiveDataCorrect = MutableLiveData<String>()
     val saveToFirebaseLiveDataException = MutableLiveData<String>()

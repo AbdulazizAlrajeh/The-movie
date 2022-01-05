@@ -1,4 +1,4 @@
-package com.example.myapplication.views
+package com.example.myapplication.views.detailsItemFragment
 
 import android.os.Build
 import android.os.Bundle
@@ -17,12 +17,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
-import com.example.myapplication.views.viewmodels.MainViewModel
 import com.example.myapplication.models.Result
 import com.example.myapplication.util.DateConvert
-import com.example.myapplication.views.viewmodels.SaveToFirebaseViewModel
-import com.example.myapplication.views.viewmodels.WatchLaterViewModel
-import com.example.myapplication.views.viewmodels.WatchedViewModel
+import com.example.myapplication.views.mainFragment.MainViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 private const val TAG = "DetailsItemFragment"

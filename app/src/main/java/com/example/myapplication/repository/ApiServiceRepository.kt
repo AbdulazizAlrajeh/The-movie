@@ -8,7 +8,7 @@ import java.lang.Exception
 
 private const val BASE_URL = "https://api.themoviedb.org"
 
-class ApiServiceRepository(val context: Context) {
+object ApiServiceRepository {
 
     // Retrofit.Builder
     // And we need to specify a factory for deserializing the response using the Gson library
@@ -21,22 +21,4 @@ class ApiServiceRepository(val context: Context) {
 
     suspend fun getMovies(page: Int) = retrofitApi.getMovies(page)
 
-
-    /*
-     * this companion object for restricts the instantiation of a class to one "single" instance.
-     * This is useful when exactly one object is needed to coordinate actions across the system.
-     * */
-
-    companion object {
-        private var instance: ApiServiceRepository? = null
-
-        fun init(context: Context) {
-            if (instance == null)
-                instance = ApiServiceRepository(context)
-        }
-
-        fun get(): ApiServiceRepository {
-            return instance ?: throw Exception("ApiServiceRepository must be initialized ")
-        }
-    }
 }

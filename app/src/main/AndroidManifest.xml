@@ -14,7 +14,7 @@
         android:largeHeap="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".views.RegisterActivity"
+            android:name=".views.registerActivity.RegisterActivity"
             android:exported="true" />
         <activity
             android:name=".views.LogInActivity"
