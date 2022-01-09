@@ -9,8 +9,14 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always|collapseActionView" />
     <item
+        android:id="@+id/profile_user"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Profile"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/logout_item"
         android:icon="@drawable/ic_logout"
         android:title="@string/logout"
         app:showAsAction="always|collapseActionView" />
+
 </menu>

@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.myapplication.models.Users
 import com.example.myapplication.repository.FirebaseAuthServiceRepository
 import com.example.myapplication.repository.FirebaseServiceRepository
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -21,15 +22,10 @@ class RegisterViewModel:ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = firebaseAuth.createUser(email, password)
-                response.addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        val user = Users(firstName, lastName, email)
+                response.addOnSuccessListener {
+                        val user = Users(firstName, lastName, email,FirebaseAuth.getInstance().uid.toString())
                         firebaseStore.saveUserInfo(user)
                         firebaseAuthCorrectLiveData.postValue("Save user to database")
-
-                    } else {
-                        firebaseAuthExceptionLiveData.postValue("Not save user to database")
-                    }
                 }
             }catch (e:Exception){
                 firebaseAuthExceptionLiveData.postValue(e.message.toString())

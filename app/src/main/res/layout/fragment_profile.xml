@@ -8,17 +8,20 @@
     tools:context=".views.profileFragment.ProfileFragment">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/user_imageView"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="20dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/profile" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="25dp"
         android:orientation="horizontal">
 
@@ -29,6 +32,7 @@
             android:layout_weight="1"
             android:backgroundTintMode="src_over"
             android:ems="10"
+            android:enabled="false"
             android:inputType="textPersonName"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
@@ -39,20 +43,40 @@
             android:layout_weight="1"
             android:backgroundTintMode="src_over"
             android:ems="10"
+            android:enabled="false"
             android:inputType="textPersonName"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/email_provile"
+    <TextView
+        android:id="@+id/email_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="30dp"
         android:backgroundTint="@color/black"
         android:backgroundTintMode="src_over"
         android:ems="10"
         android:inputType="textEmailAddress"
+        android:textSize="24sp"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/cancel_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/cancel"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/save_button"
@@ -60,6 +84,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:text="@string/save" />
+        android:layout_marginBottom="0dp"
+        android:text="@string/save"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/Edit_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/edit" />
 
 </LinearLayout>

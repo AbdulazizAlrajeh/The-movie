@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/detailsItemFragment"
-        android:name="com.example.myapplication.views.DetailsItemFragment"
+        android:name="com.example.myapplication.views.detailsItemFragment.DetailsItemFragment"
         android:label="@string/details_movie"
         tools:layout="@layout/fragment_details_item">
         <action
@@ -22,12 +22,12 @@
     </fragment>
     <fragment
         android:id="@+id/watchLaterFragment"
-        android:name="com.example.myapplication.views.WatchLaterFragment"
+        android:name="com.example.myapplication.views.watchLaterFragment.WatchLaterFragment"
         android:label="@string/watch_later_movies"
         tools:layout="@layout/fragment_watch_later" />
     <fragment
         android:id="@+id/watchedFragment"
-        android:name="com.example.myapplication.views.WatchedFragment"
+        android:name="com.example.myapplication.views.watchedFragment.WatchedFragment"
         android:label="@string/watched_movies"
         tools:layout="@layout/fragment_watched">
         <action
@@ -41,11 +41,19 @@
         tools:layout="@layout/fragment_details_watched" />
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.myapplication.views.MainFragment"
+        android:name="com.example.myapplication.views.mainFragment.MainFragment"
         android:label="@string/movies"
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment2_to_detailsItemFragment"
             app:destination="@id/detailsItemFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.myapplication.views.profileFragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

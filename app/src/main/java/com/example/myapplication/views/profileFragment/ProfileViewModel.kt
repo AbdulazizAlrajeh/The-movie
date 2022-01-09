@@ -1,5 +1,7 @@
 package com.example.myapplication.views.profileFragment
 
+import android.content.ContentValues
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,6 +23,10 @@ class ProfileViewModel : ViewModel() {
 
     val updateUserProfileLiveDataCorrect = MutableLiveData<String>()
     val updateUserProfileLiveDataException = MutableLiveData<String>()
+
+    val uploadImageUriLiveData = MutableLiveData<Uri>()
+    val uploadImageUriLiveDataException = MutableLiveData<String>()
+    val uploadImageUriLiveDataCorrect = MutableLiveData<String>()
     fun callUserProfile() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -59,6 +65,27 @@ class ProfileViewModel : ViewModel() {
             }
 
 
+        }
+    }
+
+    fun UploadPhoto(imageUri: Uri) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = firebaseRepository.uploadImageUser(imageUri)
+                response.addOnSuccessListener { taskSnapshot ->
+                    Log.d(TAG, taskSnapshot.metadata?.name.toString())
+                    uploadImageUriLiveData.postValue(imageUri)
+                    uploadImageUriLiveDataCorrect.postValue("Successfully upload image to fire storage")
+
+                }.addOnFailureListener {
+                    Log.d(TAG, it.message.toString())
+                    uploadImageUriLiveDataException.postValue(it.message.toString())
+                }
+
+            } catch (e: Exception) {
+                Log.d(ContentValues.TAG, e.message.toString())
+                uploadImageUriLiveDataException.postValue(e.message.toString())
+            }
         }
     }
 }

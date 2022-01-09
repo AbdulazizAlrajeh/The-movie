@@ -25,4 +25,6 @@
     <string name="last_name">Last Name</string>
     <string name="username">Username</string>
     <string name="save">Save</string>
+    <string name="edit">Edit</string>
+    <string name="cancel">cancel</string>
 </resources>

@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.example.myapplication.R
 import com.example.myapplication.util.ValidationEmailAndPassword
+import com.example.myapplication.views.MainActivity
 import com.example.myapplication.views.logInActivity.LogInActivity
 
 
@@ -71,7 +72,7 @@ class RegisterActivity : AppCompatActivity() {
                 Log.d("True", it)
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
 
-                val intent = Intent(this, LogInActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
         })

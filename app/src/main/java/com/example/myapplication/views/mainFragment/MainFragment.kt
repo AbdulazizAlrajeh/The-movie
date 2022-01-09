@@ -11,6 +11,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
@@ -70,6 +71,8 @@ class MainFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         val searchItem = menu.findItem(R.id.app_bar_search)
         val searchView = searchItem.actionView as SearchView
+
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 mainAdapter.submitList(
@@ -102,6 +105,7 @@ class MainFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.d(TAG,item.itemId.toString())
         when (item.itemId) {
             logout_item -> {
                 val alertDialog = android.app.AlertDialog.Builder(context).setTitle("Logout")
@@ -126,6 +130,11 @@ class MainFragment : Fragment() {
                 alertDialog.show()
 
             }
+            else ->{
+                Log.d(TAG,"click")
+                findNavController().navigate(R.id.action_mainFragment_to_profileFragment)
+            }
+
         }
         return super.onOptionsItemSelected(item)
 

@@ -2,22 +2,26 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myapplication">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/name_of_application"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:largeHeap="true"
         android:theme="@style/Theme.MyApplication">
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/file_path" />
+
         <activity
             android:name=".views.registerActivity.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".views.LogInActivity"
+            android:name=".views.logInActivity.LogInActivity"
             android:exported="true" />
         <activity
             android:name=".views.SplashActivity"
@@ -33,6 +37,17 @@
         <activity
             android:name=".views.MainActivity"
             android:exported="true" />
+        <provider
+            android:authorities="com.example.myapplication"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path"/>
+
+        </provider>
     </application>
 
 </manifest>
