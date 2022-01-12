@@ -137,7 +137,8 @@ class ProfileFragment : Fragment() {
     fun saveEdit() {
         val firstName = binding.firstNameProfile.text.toString()
         val lastName = binding.lastNameProfile.text.toString()
-        val users = Users(firstName, lastName)
+        val email = binding.emailProfile.text.toString()
+        val users = Users(firstName, lastName,email)
         profileViewModel.saveUpdateUser(users)
     }
 
