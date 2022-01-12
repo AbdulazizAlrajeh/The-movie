@@ -22,11 +22,41 @@ I began by creating a simple design in Figma, then coding for this project, and 
 If I have an issue, I look for a solution on the internet, and if I can't find one, I consult an expert.
 
 ## ScreenShots
+This screeshot from android studio
 
+Splash Screenshots
+--- |
+
+<img width="260" alt="splash" src="https://user-images.githubusercontent.com/91452316/149097991-eef8e20d-6cac-4722-a62f-9e280f9f2081.png">
+
+Main Screenshots
+--- |
+
+<img width="264" alt="main_fragment" src="https://user-images.githubusercontent.com/91452316/149098222-3c7dadd7-969b-4079-95d6-4354d4793e55.png">
+
+Watch later Screenshots
+--- |
+
+<img width="270" alt="watch_later" src="https://user-images.githubusercontent.com/91452316/149098309-1ab4829e-e344-430f-90fa-342ccd47a061.png">
+
+Watched Screenshots
+--- |
+
+<img width="272" alt="watched" src="https://user-images.githubusercontent.com/91452316/149098376-afc49b16-e405-49d5-9ebd-951f03337324.png">
+
+Profile Screenshots
+--- |
+
+<img width="278" alt="profile" src="https://user-images.githubusercontent.com/91452316/149098440-0bc165c8-5361-4242-ac6c-c14f147980db.png">
 
 ## Future Functions
 1. Add trailer for movie
 2. Share the image , trailer, and name of movie
+
+## Favorite Functions
+1. Create a profile - The user can create his profile and edit it 
+2. Add a movie to the list - the user can add the movie to the list watch later or watch
+3. Search - user can search by name of the movie.
 
 [1]:https://developer.android.com/studio?gclid=Cj0KCQjw5oiMBhDtARIsAJi0qk1XynCsLYazXjaGg4jc2c274uQaqPKQVp84TUYHZXFwvJ-UasEAMcwaAhgFEALw_wcB&gclsrc=aw.ds
 [2]:https://developer.android.com/kotlin?gclid=Cj0KCQjw5oiMBhDtARIsAJi0qk0fRhPxeSoiv1myXTAbN7aXUWM2TrSZI-6JL_uYbnfT0XDm4-FIeZAaAvnaEALw_wcB&gclsrc=aw.ds
