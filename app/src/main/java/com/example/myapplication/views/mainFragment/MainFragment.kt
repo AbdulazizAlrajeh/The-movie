@@ -62,6 +62,8 @@ class MainFragment : Fragment() {
         observers()
 
         moviesViewModel.callGetMovies()
+
+        // call function
         addItemScroll()
 
     }
@@ -139,6 +141,11 @@ class MainFragment : Fragment() {
         return super.onOptionsItemSelected(item)
 
     }
+
+    /**
+     * This function for scroll the view
+     * and when display the last item is call the view model for new page
+     */
 
     fun addItemScroll() {
         var pastVisiblesItems: Int

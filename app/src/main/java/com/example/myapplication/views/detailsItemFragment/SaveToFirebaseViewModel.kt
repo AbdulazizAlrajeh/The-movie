@@ -23,7 +23,9 @@ class SaveToFirebaseViewModel : ViewModel() {
     val saveToFirebaseLiveDataCorrect = MutableLiveData<String>()
     val saveToFirebaseLiveDataException = MutableLiveData<String>()
 
-
+    /**
+     * This function for save the movie in firebase
+     */
     fun callSaveMovieToFirebase(result: Result) {
         viewModelScope.launch(Dispatchers.IO) {
             try {

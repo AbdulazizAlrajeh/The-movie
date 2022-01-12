@@ -39,11 +39,16 @@ class LogInActivity : AppCompatActivity() {
         val registerInLogin: TextView = findViewById(R.id.login_register_textView)
         val errorTextView:TextView = findViewById(R.id.error_textView)
 
-
+        /**
+         * When the user not have account he going to register
+         */
         registerInLogin.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
-
+        /**
+         * When user click in log in button the code is check if email and password not empty
+         * in the firestore is check if this account is in database or not
+         */
         buttonLogIn.setOnClickListener {
             val email = emailLogIn.text.toString()
             val password = passwordLogIn.text.toString()

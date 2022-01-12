@@ -10,6 +10,10 @@ import java.io.ByteArrayOutputStream
 
 object ShareImageUtil {
 
+    /**
+     * This object convert image view to bitmap
+     */
+
     fun getBitmapFromView(view: ImageView): Bitmap? {
         val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)

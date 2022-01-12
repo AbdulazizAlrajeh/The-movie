@@ -2,14 +2,12 @@ package com.example.myapplication.views.profileFragment
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
@@ -17,7 +15,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentProfileBinding
 import com.example.myapplication.models.Users
-import com.google.firebase.auth.FirebaseAuth
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.internal.entity.CaptureStrategy
@@ -46,6 +43,10 @@ class ProfileFragment : Fragment() {
         profileViewModel.callUserProfile()
 
         binding.progressBar.visibility = View.VISIBLE
+
+        /**
+         * When the user click in button edit can edit his information
+         * */
         binding.EditButton.setOnClickListener {
             binding.EditButton.visibility = View.INVISIBLE
             binding.userImageView.isEnabled = true
@@ -56,6 +57,10 @@ class ProfileFragment : Fragment() {
 
 
         }
+
+        /**
+         * When the user click in save button it is update his information
+         */
         binding.saveButton.setOnClickListener {
             saveEdit()
 
@@ -66,6 +71,10 @@ class ProfileFragment : Fragment() {
             binding.cancelButton.visibility = View.INVISIBLE
             binding.saveButton.visibility = View.INVISIBLE
         }
+
+        /**
+         * When the user click in cancel button it is can't edit before click the button edit
+         */
         binding.cancelButton.setOnClickListener {
             binding.EditButton.visibility = View.VISIBLE
             binding.userImageView.isEnabled = false
@@ -75,10 +84,14 @@ class ProfileFragment : Fragment() {
             binding.saveButton.visibility = View.INVISIBLE
         }
 
+
+        /**
+         * This for change image view
+         */
         binding.userImageView.setOnClickListener {
             ImagePicker()
         }
-       // showImage()
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -118,6 +131,9 @@ class ProfileFragment : Fragment() {
         })
     }
 
+    /**
+     * This function for update information of user
+     */
     fun saveEdit() {
         val firstName = binding.firstNameProfile.text.toString()
         val lastName = binding.lastNameProfile.text.toString()
@@ -132,17 +148,4 @@ class ProfileFragment : Fragment() {
             .captureStrategy(CaptureStrategy(true, "com.example.myapplication"))
             .forResult(IMAGE_PICKER)
     }
-
-    fun showImage(imageUri : String) {
-       // var imageUri = "https://firebasestorage.googleapis.com/v0/b/the-movie-10cd7.appspot.com/o/${FirebaseAuth.getInstance().uid.toString()}?alt=media&token=c7dc37fa-7127-4113-8c83-0ebfcf36896c"
-        Log.d("ImageUri",imageUri.toString())
-        Glide.with(this)
-            .load(imageUri)
-            .centerCrop()
-            .skipMemoryCache(true)
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .placeholder(R.drawable.profile)
-            .into(binding.userImageView)
-    }
-
 }

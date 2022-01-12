@@ -49,6 +49,11 @@ class DetailsItemFragment : Fragment() {
         val wathcedLater: Button = view.findViewById(R.id.details_watch_later_button)
         val watched: Button = view.findViewById(R.id.details_watched_button)
         observers()
+
+        /**
+         * The lines from 55 to 64 is get the item for display in this fragment
+         */
+
         moviesViewModel.selectedItemMutableLiveData.observe(viewLifecycleOwner, Observer {
             Glide.with(requireContext())
                 .load("https://image.tmdb.org/t/p/w500/${it.posterPath}")
@@ -59,14 +64,18 @@ class DetailsItemFragment : Fragment() {
             dateMovie.text = "Date:${date}"
             selectItemModel = it
         })
-
+        /**
+         * Where click the user the button watch later is update some value and add to the list watch later
+         */
         wathcedLater.setOnClickListener {
             selectItemModel.iswatchedLater = true
             selectItemModel.userId = userId
             WatchLaterViewModel.callSaveMovieToFirebase(selectItemModel)
-
-
         }
+
+        /**
+         * Where click the user the button watched is update some value and add to the list watched
+         */
         watched.setOnClickListener {
             selectItemModel.isWatched = true
             Log.d(TAG, "${selectItemModel.isWatched}")

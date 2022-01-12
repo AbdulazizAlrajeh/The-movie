@@ -3,7 +3,6 @@ package com.example.myapplication.views.mainFragment
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

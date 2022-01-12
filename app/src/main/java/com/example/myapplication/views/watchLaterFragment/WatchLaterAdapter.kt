@@ -2,6 +2,10 @@ package com.example.myapplication.views.watchLaterFragment
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.net.Uri
+import android.provider.MediaStore
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 
@@ -16,6 +20,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.example.myapplication.models.Result
 import com.example.myapplication.util.ShareImageUtil
+import java.io.ByteArrayOutputStream
 
 class WatchLaterAdapter(val viewmodel: WatchLaterViewModel, val context: Context) :
     RecyclerView.Adapter<WatchLaterAdapter.ViewModeler>() {
@@ -93,6 +98,8 @@ class WatchLaterAdapter(val viewmodel: WatchLaterViewModel, val context: Context
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
+
+
     fun updatelist(list: MutableList<Result>, item: Result){
         var list = mutableListOf<Result>()
         list.addAll(differ.currentList)

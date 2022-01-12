@@ -35,10 +35,18 @@ class RegisterActivity : AppCompatActivity() {
         val lastNameEditText:EditText = findViewById(R.id.lastname_editText)
         val errorTextView: TextView = findViewById(R.id.error_textView)
         val validation = ValidationEmailAndPassword()
+
+        /**
+         * When the user have account go to login page
+         */
         loginInRegister.setOnClickListener {
             startActivity(Intent(this, LogInActivity::class.java))
         }
 
+        /**
+         * When user click in register button the code is check if email and password not empty
+         * in the firestore is check if this account is in database or not
+         */
         buttonRegister.setOnClickListener {
             val email = emailRegister.text.toString()
             val password = passwordRegister.text.toString()
