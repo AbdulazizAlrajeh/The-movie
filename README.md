@@ -1,6 +1,6 @@
 
 ![image](https://user-images.githubusercontent.com/91452316/140028501-c5493074-90dc-4757-9723-fd8486c9fd5c.png)
-# The-movie
+# The movie
 The movie is can the user see if he's seen the movie before and if want add to watch later
 ## Technologies Used
 1. [Android Studio][1]
